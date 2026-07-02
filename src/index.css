@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #07080a;
+  color: #f4ecda;
+  font-family: 'Manrope', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #d4a24a;
+  color: #07080a;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0d08;
+}
+::-webkit-scrollbar-thumb {
+  background: #354c29;
+  border-radius: 999px;
+  border: 2px solid #0c0d08;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #456233;
+}
+
+@layer utilities {
+  .film-grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    mix-blend-mode: overlay;
+    opacity: 0.35;
+    background-image: theme('backgroundImage.grain');
+    animation: grain-shift 1.2s steps(4) infinite;
+  }
+
+  .vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 55;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 45%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+  }
+
+  .text-outline-gold {
+    -webkit-text-stroke: 1px #d4a24a;
+    color: transparent;
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, -3%); }
+  50% { transform: translate(2%, 3%); }
+  75% { transform: translate(-3%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+
+.eyebrow {
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
