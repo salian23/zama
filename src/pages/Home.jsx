@@ -130,6 +130,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Full-bleed cinematic pour banner */}
+      <section className="relative h-[70vh] min-h-[440px] w-full overflow-hidden">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/videos/tea-pour.mp4"
+          poster="/images/tea-pour-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/40 to-ink-950/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/60" />
+
+        <div className="relative z-10 flex h-full items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto max-w-7xl w-full px-6 md:px-10"
+          >
+            <span className="eyebrow text-gold-300 mb-5 block">
+              The Pour
+            </span>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-7xl text-cream leading-[1.02] max-w-2xl">
+              Every cup begins
+              <br /> with a slow pour.
+            </h2>
+            <p className="mt-6 max-w-md text-cream/70 leading-relaxed">
+              No rush, no shortcuts — just amber liquor caught in the light,
+              exactly as it should be.
+            </p>
+            <div className="mt-9">
+              <Button to="/shop">Find Your Steep</Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       <section className="relative bg-tea-950/40 border-y border-cream/10 px-6 md:px-10 py-28 overflow-hidden">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 md:grid-cols-2">
           <motion.div
