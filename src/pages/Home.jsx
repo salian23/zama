@@ -57,7 +57,7 @@ export default function Home() {
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           <TeaScene sectionRef={heroRef} className="absolute inset-0" />
 
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-start pt-24 sm:justify-center sm:pt-0 px-6 text-center">
             <motion.span
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}

@@ -1,5 +1,5 @@
-import { Suspense, useEffect, useRef } from 'react'
-import { Canvas } from '@react-three/fiber'
+import { Suspense, useEffect, useRef, useState } from 'react'
+import { Canvas, useThree } from '@react-three/fiber'
 import { ContactShadows, Environment, Lightformer } from '@react-three/drei'
 import {
   EffectComposer,
@@ -18,8 +18,40 @@ import Loader from './Loader'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Keeps the cup framed across aspect ratios. On a narrow portrait phone the
+// perspective camera's horizontal field of view collapses, which blows the
+// cup up and shoves it into the headline — so pull the camera back (and
+// widen fov a touch) as the viewport gets more portrait.
+function ResponsiveCamera() {
+  const { camera, size } = useThree()
+  useEffect(() => {
+    const aspect = size.width / size.height
+    if (aspect < 0.7) {
+      camera.position.z = 12.5
+      camera.fov = 36
+    } else if (aspect < 1.05) {
+      camera.position.z = 9.8
+      camera.fov = 33
+    } else {
+      camera.position.z = 7.6
+      camera.fov = 30
+    }
+    camera.updateProjectionMatrix()
+  }, [camera, size])
+  return null
+}
+
 export default function TeaScene({ sectionRef, className = '' }) {
   const scrollProgress = useRef(0)
+  const [portrait, setPortrait] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    const update = () => setPortrait(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   useEffect(() => {
     if (!sectionRef?.current) return undefined
@@ -43,6 +75,7 @@ export default function TeaScene({ sectionRef, className = '' }) {
         camera={{ position: [0, 3.3, 7.6], fov: 30 }}
         gl={{ antialias: true }}
       >
+        <ResponsiveCamera />
         <color attach="background" args={['#07080a']} />
         <fogExp2 attach="fog" args={['#07080a', 0.068]} />
 
@@ -82,15 +115,21 @@ export default function TeaScene({ sectionRef, className = '' }) {
               scale={[3, 3, 1]}
             />
           </Environment>
-          <CameraRig scrollProgress={scrollProgress} lookAt={[0, 0.85, 0]}>
-            <group scale={0.85} position={[0, -0.35, 0]}>
+          <CameraRig
+            scrollProgress={scrollProgress}
+            lookAt={[0, portrait ? 1.7 : 0.85, 0]}
+          >
+            <group
+              scale={portrait ? 0.68 : 0.85}
+              position={[0, portrait ? -1.7 : -0.35, 0]}
+            >
               <TeaCupModel targetSize={2.7} position={[0, 0, 0]} rotationY={-0.4} />
               <Steam position={[0, 1.6, 0]} height={2.4} />
               <Leaves radius={2.9} center={[0, 1.4, 0]} />
             </group>
           </CameraRig>
           <ContactShadows
-            position={[0, -0.35, 0]}
+            position={[0, portrait ? -1.55 : -0.35, 0]}
             opacity={0.55}
             scale={7}
             blur={2.4}
