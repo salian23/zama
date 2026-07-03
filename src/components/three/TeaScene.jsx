@@ -10,7 +10,7 @@ import {
 } from '@react-three/postprocessing'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import TeaCup from './TeaCup'
+import TeaCupModel from './TeaCupModel'
 import Steam from './Steam'
 import Leaves from './Leaves'
 import CameraRig from './CameraRig'
@@ -84,8 +84,8 @@ export default function TeaScene({ sectionRef, className = '' }) {
           </Environment>
           <CameraRig scrollProgress={scrollProgress} lookAt={[0, 0.85, 0]}>
             <group scale={0.85} position={[0, -0.35, 0]}>
-              <TeaCup position={[0, 0, 0]} />
-              <Steam position={[0, 1.43, 0]} height={2.4} />
+              <TeaCupModel targetSize={2.7} position={[0, 0, 0]} rotationY={-0.4} />
+              <Steam position={[0, 1.6, 0]} height={2.4} />
               <Leaves radius={2.9} center={[0, 1.4, 0]} />
             </group>
           </CameraRig>
