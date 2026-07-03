@@ -1,6 +1,13 @@
 import { Suspense, useEffect, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { ContactShadows, Environment, Lightformer } from '@react-three/drei'
+import {
+  EffectComposer,
+  Bloom,
+  DepthOfField,
+  Vignette,
+  Noise,
+} from '@react-three/postprocessing'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import TeaCup from './TeaCup'
@@ -89,6 +96,26 @@ export default function TeaScene({ sectionRef, className = '' }) {
             blur={2.4}
             far={3}
           />
+
+          {/* Cinematic post-processing: filmic focus, glowing highlights,
+              gentle vignette and grain give the real-time scene the look of
+              a rendered commercial shot rather than a raw 3D viewport. */}
+          <EffectComposer multisampling={4}>
+            <DepthOfField
+              target={[0, 0.5, 0]}
+              focalLength={0.018}
+              bokehScale={2.6}
+              height={640}
+            />
+            <Bloom
+              intensity={0.7}
+              luminanceThreshold={0.72}
+              luminanceSmoothing={0.25}
+              mipmapBlur
+            />
+            <Vignette eskil={false} offset={0.3} darkness={0.8} />
+            <Noise opacity={0.045} premultiply />
+          </EffectComposer>
         </Suspense>
       </Canvas>
     </div>
