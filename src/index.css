@@ -72,6 +72,25 @@ body {
     color: transparent;
   }
 
+  /* A warm gold highlight baked into the text fill; SectionHeading animates
+     its background-position so the sheen sweeps across once on enter. */
+  .heading-sheen {
+    background-image: linear-gradient(
+      100deg,
+      #f4ecda 0%,
+      #f4ecda 38%,
+      #f6e4b0 48%,
+      #e3ba69 52%,
+      #f4ecda 62%,
+      #f4ecda 100%
+    );
+    background-size: 250% 100%;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   .mask-fade-b {
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 60%, transparent 100%);

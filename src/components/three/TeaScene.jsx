@@ -25,19 +25,33 @@ gsap.registerPlugin(ScrollTrigger)
 // widen fov a touch) as the viewport gets more portrait.
 function ResponsiveCamera() {
   const { camera, size } = useThree()
+  const introduced = useRef(false)
   useEffect(() => {
     const aspect = size.width / size.height
+    let targetZ = 7.6
+    let fov = 30
     if (aspect < 0.7) {
-      camera.position.z = 12.5
-      camera.fov = 36
+      targetZ = 12.5
+      fov = 36
     } else if (aspect < 1.05) {
-      camera.position.z = 9.8
-      camera.fov = 33
-    } else {
-      camera.position.z = 7.6
-      camera.fov = 30
+      targetZ = 9.8
+      fov = 33
     }
+    camera.fov = fov
     camera.updateProjectionMatrix()
+
+    if (!introduced.current) {
+      // Cinematic reveal: camera dollies back from a tight framing to rest.
+      introduced.current = true
+      camera.position.z = targetZ * 0.62
+      gsap.to(camera.position, {
+        z: targetZ,
+        duration: 2.6,
+        ease: 'power3.out',
+      })
+    } else {
+      camera.position.z = targetZ
+    }
   }, [camera, size])
   return null
 }

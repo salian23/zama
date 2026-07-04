@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import useSmoothScroll from './hooks/useSmoothScroll'
 import Home from './pages/Home'
 import Shop from './pages/Shop'
 import About from './pages/About'
@@ -33,6 +34,7 @@ function AnimatedPage({ children }) {
 
 export default function App() {
   const location = useLocation()
+  useSmoothScroll()
 
   return (
     <div className="relative bg-ink-950 min-h-screen">

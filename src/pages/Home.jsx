@@ -4,6 +4,7 @@ import TeaScene from '../components/three/TeaScene'
 import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
 import ProductCard from '../components/ui/ProductCard'
+import Parallax from '../components/ui/Parallax'
 import { PRODUCTS } from '../data/products'
 
 const STEPS = [
@@ -197,25 +198,27 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="relative aspect-square rounded-3xl overflow-hidden border border-gold-400/20"
-          >
-            <video
-              className="absolute inset-0 h-full w-full object-cover"
-              src="/videos/tea-steam.mp4"
-              poster="/images/tea-steam-poster.jpg"
-              autoPlay
-              muted
-              loop
-              playsInline
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/10 to-transparent" />
-            <div className="absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_70%_75%,rgba(212,162,74,0.35),transparent_55%)]" />
-          </motion.div>
+          <Parallax speed={40}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="relative aspect-square rounded-3xl overflow-hidden border border-gold-400/20"
+            >
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                src="/videos/tea-steam.mp4"
+                poster="/images/tea-steam-poster.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/10 to-transparent" />
+              <div className="absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_70%_75%,rgba(212,162,74,0.35),transparent_55%)]" />
+            </motion.div>
+          </Parallax>
         </div>
       </section>
 

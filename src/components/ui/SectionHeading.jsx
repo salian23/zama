@@ -17,13 +17,15 @@ export default function SectionHeading({
       {eyebrow && (
         <span className="eyebrow text-gold-300/90 block mb-4">{eyebrow}</span>
       )}
-      <h2
-        className={`font-display font-medium text-4xl md:text-6xl leading-tight ${
-          light ? 'text-cream' : 'text-cream'
-        }`}
+      <motion.h2
+        initial={{ backgroundPositionX: '150%' }}
+        whileInView={{ backgroundPositionX: '-50%' }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 1.4, ease: 'easeOut', delay: 0.15 }}
+        className="font-display font-medium text-4xl md:text-6xl leading-tight text-cream heading-sheen"
       >
         {title}
-      </h2>
+      </motion.h2>
     </motion.div>
   )
 }
