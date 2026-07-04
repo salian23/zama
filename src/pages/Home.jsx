@@ -5,7 +5,24 @@ import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
 import ProductCard from '../components/ui/ProductCard'
 import Parallax from '../components/ui/Parallax'
+import { useIntroDone } from '../context/IntroContext'
 import { PRODUCTS } from '../data/products'
+
+// Choreographed hero entrance — items rise and un-blur in sequence once the
+// preloader curtain lifts, for a deliberate, premium reveal.
+const heroContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.14, delayChildren: 0.15 } },
+}
+const heroItem = {
+  hidden: { opacity: 0, y: 26, filter: 'blur(8px)' },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] },
+  },
+}
 
 const STEPS = [
   {
@@ -51,6 +68,7 @@ const TESTIMONIALS = [
 export default function Home() {
   const heroRef = useRef(null)
   const featured = PRODUCTS.slice(0, 4)
+  const introDone = useIntroDone()
 
   return (
     <main className="relative">
@@ -58,19 +76,20 @@ export default function Home() {
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           <TeaScene sectionRef={heroRef} className="absolute inset-0" />
 
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-start pt-24 sm:justify-center sm:pt-0 px-6 text-center">
+          <motion.div
+            variants={heroContainer}
+            initial="hidden"
+            animate={introDone ? 'show' : 'hidden'}
+            className="pointer-events-none absolute inset-0 flex flex-col items-center justify-start pt-24 sm:justify-center sm:pt-0 px-6 text-center"
+          >
             <motion.span
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
+              variants={heroItem}
               className="eyebrow text-gold-300 mb-6"
             >
               Est. for slow mornings
             </motion.span>
             <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              variants={heroItem}
               className="font-display text-5xl sm:text-7xl md:text-8xl leading-[0.95] text-cream max-w-4xl"
             >
               Steep Into
@@ -78,18 +97,14 @@ export default function Home() {
               <span className="text-gold-400">Stillness</span>
             </motion.h1>
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.75 }}
+              variants={heroItem}
               className="mt-6 max-w-xl text-cream/60 text-base md:text-lg"
             >
               Rare leaves, sourced from single gardens and poured with
               intention. This is tea as a cinematic ritual, not a routine.
             </motion.p>
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1 }}
+              variants={heroItem}
               className="pointer-events-auto mt-10 flex flex-wrap items-center justify-center gap-4"
             >
               <Button to="/shop">Explore the Menu</Button>
@@ -97,7 +112,7 @@ export default function Home() {
                 Our Story
               </Button>
             </motion.div>
-          </div>
+          </motion.div>
 
           <motion.div
             animate={{ y: [0, 10, 0] }}
