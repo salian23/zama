@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Product3DViewer from '../three/Product3DViewer'
 
 export default function ProductCard({ product }) {
   const [added, setAdded] = useState(false)
+  const [viewer, setViewer] = useState(false)
 
   const handleAdd = () => {
     setAdded(true)
@@ -27,6 +29,14 @@ export default function ProductCard({ product }) {
         <span className="absolute top-4 left-4 eyebrow text-cream/80 bg-ink-950/40 px-3 py-1 rounded-full backdrop-blur-sm">
           {product.category}
         </span>
+        {product.model3d && (
+          <button
+            onClick={() => setViewer(true)}
+            className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full border border-gold-400/50 bg-ink-950/50 px-3 py-1.5 text-[10px] uppercase tracking-widest2 text-gold-300 backdrop-blur-sm transition-colors hover:bg-gold-400 hover:text-ink-950"
+          >
+            <span className="text-sm leading-none">⟳</span> View in 3D
+          </button>
+        )}
         <div
           className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full opacity-40 blur-2xl transition-transform duration-700 group-hover:scale-125"
           style={{ background: product.accent }}
@@ -62,6 +72,15 @@ export default function ProductCard({ product }) {
           {added ? 'Added to Cart ✓' : 'Add to Cart'}
         </button>
       </div>
+
+      {product.model3d && (
+        <Product3DViewer
+          open={viewer}
+          onClose={() => setViewer(false)}
+          modelUrl={product.model3d}
+          name={product.name}
+        />
+      )}
     </motion.div>
   )
 }

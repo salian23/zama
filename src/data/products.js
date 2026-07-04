@@ -11,6 +11,7 @@ export const PRODUCTS = [
     notes: ['Malt', 'Honey', 'Cacao'],
     gradient: 'linear-gradient(160deg, #5f3f22 0%, #2a1a10 70%)',
     accent: '#d4a24a',
+    model3d: '/models/tea-tin.glb',
   },
   {
     id: 'jade-mist',
