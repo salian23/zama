@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import LeafAccent from '../components/three/LeafAccent'
 
 const initialForm = { name: '', email: '', message: '' }
 
@@ -39,8 +38,17 @@ export default function Contact() {
 
   return (
     <main className="relative">
-      <section className="relative h-[50vh] min-h-[360px] w-full overflow-hidden">
-        <LeafAccent className="absolute inset-0" />
+      <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/videos/tea-leaf-water.mp4"
+          poster="/images/tea-leaf-water-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/45 to-ink-950/60" />
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
