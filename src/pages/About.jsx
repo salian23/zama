@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import LeafAccent from '../components/three/LeafAccent'
 import SectionHeading from '../components/ui/SectionHeading'
 import Button from '../components/ui/Button'
 
@@ -48,8 +47,17 @@ const VALUES = [
 export default function About() {
   return (
     <main className="relative">
-      <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
-        <LeafAccent className="absolute inset-0" />
+      <section className="relative h-[70vh] min-h-[460px] w-full overflow-hidden">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/videos/tea-garden.mp4"
+          poster="/images/tea-garden-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/40 to-ink-950/60" />
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
