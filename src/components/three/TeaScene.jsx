@@ -13,6 +13,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import TeaCupModel from './TeaCupModel'
 import Steam from './Steam'
 import Leaves from './Leaves'
+import DustMotes from './DustMotes'
 import CameraRig from './CameraRig'
 import Loader from './Loader'
 
@@ -128,8 +129,9 @@ export default function TeaScene({ sectionRef, className = '' }) {
               <Leaves radius={2.9} center={[0, 1.4, 0]} />
             </group>
           </CameraRig>
+          <DustMotes count={portrait ? 80 : 140} radius={6} />
           <ContactShadows
-            position={[0, portrait ? -1.55 : -0.35, 0]}
+            position={[0, portrait ? -1.7 : -0.35, 0]}
             opacity={0.55}
             scale={7}
             blur={2.4}

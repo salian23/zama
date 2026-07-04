@@ -20,7 +20,10 @@ export default function CameraRig({ children, scrollProgress, lookAt = [0, 1.1, 
 
     if (groupRef.current) {
       const progress = scrollProgress?.current ?? 0
-      groupRef.current.rotation.y = progress * Math.PI * 0.9
+      // Scroll-driven reveal + a slow continuous turntable so the scene
+      // reads as living 3D even when the visitor isn't scrolling.
+      const t = state.clock.getElapsedTime()
+      groupRef.current.rotation.y = progress * Math.PI * 0.9 + t * 0.12
       groupRef.current.position.y = -progress * 0.6
       groupRef.current.scale.setScalar(1 - progress * 0.12)
     }
