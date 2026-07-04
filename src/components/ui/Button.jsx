@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import useMagnetic from '../../hooks/useMagnetic'
 
 export default function Button({
   children,
@@ -9,8 +10,9 @@ export default function Button({
   className = '',
   type = 'button',
 }) {
+  const magnetic = useMagnetic(variant === 'link' ? 0 : 0.3)
   const base =
-    'inline-flex items-center justify-center gap-2 px-8 py-3 text-xs uppercase tracking-widest2 font-body font-semibold transition-all duration-500 rounded-full'
+    'inline-flex items-center justify-center gap-2 px-8 py-3 text-xs uppercase tracking-widest2 font-body font-semibold transition-[transform,background-color,box-shadow,border-color,color] duration-300 ease-out rounded-full will-change-transform'
   const styles =
     variant === 'solid'
       ? 'bg-gold-400 text-ink-950 hover:bg-gold-300 hover:shadow-[0_0_30px_rgba(212,162,74,0.35)]'
@@ -22,20 +24,25 @@ export default function Button({
 
   if (to) {
     return (
-      <Link to={to} className={`${base} ${styles} ${className}`}>
+      <Link ref={magnetic} to={to} className={`${base} ${styles} ${className}`}>
         {content}
       </Link>
     )
   }
   if (href) {
     return (
-      <a href={href} className={`${base} ${styles} ${className}`}>
+      <a ref={magnetic} href={href} className={`${base} ${styles} ${className}`}>
         {content}
       </a>
     )
   }
   return (
-    <button type={type} onClick={onClick} className={`${base} ${styles} ${className}`}>
+    <button
+      ref={magnetic}
+      type={type}
+      onClick={onClick}
+      className={`${base} ${styles} ${className}`}
+    >
       {content}
     </button>
   )

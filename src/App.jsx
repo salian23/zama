@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import CustomCursor from './components/CustomCursor'
 import useSmoothScroll from './hooks/useSmoothScroll'
 import { IntroContext } from './context/IntroContext'
 import Home from './pages/Home'
@@ -57,6 +58,7 @@ export default function App() {
   return (
     <IntroContext.Provider value={introDone}>
       <div className="relative bg-ink-950 min-h-screen">
+        <CustomCursor />
         <div className="film-grain" />
         <div className="vignette" />
         <Navbar />
