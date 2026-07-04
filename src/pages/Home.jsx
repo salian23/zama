@@ -5,6 +5,7 @@ import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
 import ProductCard from '../components/ui/ProductCard'
 import Parallax from '../components/ui/Parallax'
+import RitualSequence from '../components/RitualSequence'
 import { useIntroDone } from '../context/IntroContext'
 import { PRODUCTS } from '../data/products'
 
@@ -237,33 +238,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative px-6 md:px-10 py-28">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="The Ritual" title="From Mountain to Mug" />
-          <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-4">
-            {STEPS.map((step, i) => (
-              <motion.div
-                key={step.n}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.7, delay: i * 0.1 }}
-                className="relative border-t border-gold-400/30 pt-6"
-              >
-                <span className="font-display text-5xl text-gold-400/60">
-                  {step.n}
-                </span>
-                <h3 className="mt-4 font-display text-2xl text-cream">
-                  {step.title}
-                </h3>
-                <p className="mt-3 text-sm text-cream/55 leading-relaxed">
-                  {step.body}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RitualSequence
+        eyebrow="The Ritual"
+        title="From Mountain to Mug"
+        steps={STEPS}
+      />
 
       <section className="relative bg-ink-900 px-6 md:px-10 py-28">
         <div className="mx-auto max-w-7xl">
