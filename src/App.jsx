@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import CustomCursor from './components/CustomCursor'
 import PageCurtain from './components/PageCurtain'
+import ScrollProgress from './components/ScrollProgress'
 import useSmoothScroll from './hooks/useSmoothScroll'
 import { IntroContext } from './context/IntroContext'
 import Home from './pages/Home'
@@ -36,6 +37,7 @@ export default function App() {
     <IntroContext.Provider value={introDone}>
       <div className="relative bg-ink-950 min-h-screen">
         <CustomCursor />
+        <ScrollProgress />
         <PageCurtain />
         <div className="film-grain" />
         <div className="vignette" />

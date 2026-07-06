@@ -1,10 +1,30 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Product3DViewer from '../three/Product3DViewer'
 
 export default function ProductCard({ product }) {
   const [added, setAdded] = useState(false)
   const [viewer, setViewer] = useState(false)
+
+  // Cursor-following 3D tilt (desktop only).
+  const px = useMotionValue(0.5)
+  const py = useMotionValue(0.5)
+  const rotateX = useSpring(useTransform(py, [0, 1], [7, -7]), { stiffness: 150, damping: 18 })
+  const rotateY = useSpring(useTransform(px, [0, 1], [-7, 7]), { stiffness: 150, damping: 18 })
+
+  const finePointer =
+    typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches
+
+  const handleMove = (e) => {
+    if (!finePointer) return
+    const r = e.currentTarget.getBoundingClientRect()
+    px.set((e.clientX - r.left) / r.width)
+    py.set((e.clientY - r.top) / r.height)
+  }
+  const handleLeave = () => {
+    px.set(0.5)
+    py.set(0.5)
+  }
 
   const handleAdd = () => {
     setAdded(true)
@@ -17,7 +37,9 @@ export default function ProductCard({ product }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -6 }}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-cream/10 bg-ink-800/60 backdrop-blur-sm"
     >
       <div
