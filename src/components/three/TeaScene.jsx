@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { ContactShadows, Environment, Lightformer } from '@react-three/drei'
 import {
@@ -16,6 +16,7 @@ import Leaves from './Leaves'
 import DustMotes from './DustMotes'
 import CameraRig from './CameraRig'
 import Loader from './Loader'
+import { getTimeOfDay } from '../../lib/timeOfDay'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -59,6 +60,7 @@ function ResponsiveCamera() {
 export default function TeaScene({ sectionRef, className = '' }) {
   const scrollProgress = useRef(0)
   const [portrait, setPortrait] = useState(false)
+  const tod = useMemo(() => getTimeOfDay(), [])
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)')
@@ -92,18 +94,18 @@ export default function TeaScene({ sectionRef, className = '' }) {
       >
         <ResponsiveCamera />
         <color attach="background" args={['#07080a']} />
-        <fogExp2 attach="fog" args={['#07080a', 0.068]} />
+        <fogExp2 attach="fog" args={['#07080a', tod.fog]} />
 
-        <ambientLight intensity={0.4} color="#8aa876" />
+        <ambientLight intensity={tod.ambient.intensity} color={tod.ambient.color} />
         <directionalLight
           position={[3.2, 5, 2.4]}
-          intensity={1.8}
-          color="#f4d9a0"
+          intensity={tod.key.intensity}
+          color={tod.key.color}
           castShadow
           shadow-mapSize={[1024, 1024]}
         />
-        <pointLight position={[-3.5, 2.2, -2]} intensity={1.3} color="#5c7d43" />
-        <pointLight position={[0, 0.6, 3]} intensity={0.7} color="#e3ba69" />
+        <pointLight position={[-3.5, 2.2, -2]} intensity={tod.rim.intensity} color={tod.rim.color} />
+        <pointLight position={[0, 0.6, 3]} intensity={tod.warm.intensity} color={tod.warm.color} />
         <pointLight position={[0, 2.6, 1.5]} intensity={0.5} color="#f4ecda" />
 
         <Suspense fallback={<Loader />}>

@@ -8,6 +8,7 @@ import Parallax from '../components/ui/Parallax'
 import WordReveal from '../components/ui/WordReveal'
 import RitualSequence from '../components/RitualSequence'
 import { useIntroDone } from '../context/IntroContext'
+import { getTimeOfDay } from '../lib/timeOfDay'
 import { PRODUCTS } from '../data/products'
 
 // Choreographed hero entrance — items rise and un-blur in sequence once the
@@ -71,6 +72,7 @@ export default function Home() {
   const heroRef = useRef(null)
   const featured = PRODUCTS.slice(0, 4)
   const introDone = useIntroDone()
+  const greeting = getTimeOfDay().greeting
 
   // Scroll-to-brew: a warm amber glow deepens over the hero as it scrolls,
   // so the cup visibly "steeps" alongside the thickening steam.
@@ -102,7 +104,7 @@ export default function Home() {
               variants={heroItem}
               className="eyebrow text-gold-300 mb-6"
             >
-              Est. for slow mornings
+              {greeting} · steep slowly
             </motion.span>
             <motion.h1
               variants={heroItem}
