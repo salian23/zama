@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div>
           <span className="font-display text-2xl text-cream">
-            Gilded <span className="text-gold-400">Leaf</span>
+Beth <span className="text-gold-400">Tea</span>
           </span>
           <p className="mt-4 text-sm text-cream/50 leading-relaxed max-w-xs">
             Rare leaves, slow steeps, and rituals worth savoring. A tea house
@@ -60,7 +60,7 @@ export default function Footer() {
 
       <div className="border-t border-cream/10">
         <div className="mx-auto max-w-7xl px-6 md:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-cream/30">
-          <span>&copy; {new Date().getFullYear()} Gilded Leaf Tea House. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} Beth Tea. All rights reserved.</span>
           <span>Crafted with quiet obsession.</span>
         </div>
       </div>

@@ -35,7 +35,7 @@ export default function PageCurtain() {
             transition={{ duration: 0.9, times: [0, 0.45, 1], ease: 'easeInOut' }}
           >
             <span className="font-display text-3xl md:text-5xl tracking-wide text-cream">
-              Gilded <span className="text-gold-400">Leaf</span>
+Beth <span className="text-gold-400">Tea</span>
             </span>
             <span className="h-px w-24 bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
           </motion.div>

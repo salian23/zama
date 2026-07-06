@@ -86,12 +86,12 @@ export default function Contact() {
             </div>
             <div>
               <h3 className="eyebrow text-gold-300 mb-3">Write to Us</h3>
-              <p className="text-cream/70">hello@gildedleaf.tea</p>
+              <p className="text-cream/70">hello@bethtea.co.uk</p>
               <p className="text-cream/70">+1 (555) 013-9284</p>
             </div>
             <div>
               <h3 className="eyebrow text-gold-300 mb-3">Wholesale &amp; Press</h3>
-              <p className="text-cream/70">trade@gildedleaf.tea</p>
+              <p className="text-cream/70">trade@bethtea.co.uk</p>
             </div>
           </motion.div>
 

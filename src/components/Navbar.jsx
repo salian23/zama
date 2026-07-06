@@ -30,7 +30,7 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-10">
         <NavLink to="/" className="flex items-center gap-2">
           <span className="font-display text-2xl tracking-wide text-cream">
-            Gilded <span className="text-gold-400">Leaf</span>
+Beth <span className="text-gold-400">Tea</span>
           </span>
         </NavLink>
 

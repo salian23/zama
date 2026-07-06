@@ -12,7 +12,7 @@ const TIMELINE = [
   {
     year: '2017',
     title: 'Direct Trade Begins',
-    body: 'Gilded Leaf signs its first direct-trade agreements, cutting out four layers of middlemen.',
+    body: 'Beth Tea signs its first direct-trade agreements, cutting out four layers of middlemen.',
   },
   {
     year: '2020',

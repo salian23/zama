@@ -58,7 +58,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      'I have never felt a brand understand ritual the way Gilded Leaf does. Every detail is intentional.',
+      'I have never felt a brand understand ritual the way Beth Tea does. Every detail is intentional.',
     name: 'M. Okafor',
   },
   {

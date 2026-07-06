@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -8,10 +8,13 @@ import PageCurtain from './components/PageCurtain'
 import ScrollProgress from './components/ScrollProgress'
 import useSmoothScroll from './hooks/useSmoothScroll'
 import { IntroContext } from './context/IntroContext'
-import Home from './pages/Home'
-import Shop from './pages/Shop'
-import About from './pages/About'
-import Contact from './pages/Contact'
+
+// Route-level code splitting: each page (and its heavy 3D/video deps) loads
+// on demand, so inner pages aren't blocked by the home hero's WebGL bundle.
+const Home = lazy(() => import('./pages/Home'))
+const Shop = lazy(() => import('./pages/Shop'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
 
 export default function App() {
   const location = useLocation()
@@ -43,12 +46,14 @@ export default function App() {
         <div className="vignette" />
         <Navbar />
         <ScrollToTop />
-        <Routes location={location}>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen" />}>
+          <Routes location={location}>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Suspense>
         <Footer />
       </div>
     </IntroContext.Provider>
