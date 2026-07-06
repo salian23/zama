@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import SectionHeading from '../components/ui/SectionHeading'
 import Button from '../components/ui/Button'
+import WordReveal from '../components/ui/WordReveal'
 
 const TIMELINE = [
   {
@@ -82,17 +83,13 @@ export default function About() {
 
       <section className="relative px-6 md:px-10 py-28">
         <div className="mx-auto max-w-4xl text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.8 }}
+          <WordReveal
+            as="p"
+            text="“We didn’t set out to build a tea brand. We set out to protect a way of drinking tea that the modern world keeps trying to speed past.”"
             className="font-display text-2xl md:text-3xl text-cream/85 leading-relaxed"
-          >
-            &ldquo;We didn&rsquo;t set out to build a tea brand. We set out to
-            protect a way of drinking tea that the modern world keeps trying
-            to speed past.&rdquo;
-          </motion.p>
+            stagger={0.05}
+            amount={0.5}
+          />
           <p className="mt-6 eyebrow text-gold-300/80">Mei Lin, Founder</p>
         </div>
       </section>

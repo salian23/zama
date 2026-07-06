@@ -5,6 +5,7 @@ import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
 import ProductCard from '../components/ui/ProductCard'
 import Parallax from '../components/ui/Parallax'
+import WordReveal from '../components/ui/WordReveal'
 import RitualSequence from '../components/RitualSequence'
 import { useIntroDone } from '../context/IntroContext'
 import { PRODUCTS } from '../data/products'
@@ -257,9 +258,13 @@ export default function Home() {
                 transition={{ duration: 0.7, delay: i * 0.12 }}
                 className="rounded-2xl border border-cream/10 bg-ink-800/50 p-8"
               >
-                <p className="font-display text-xl text-cream/90 leading-relaxed italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
+                <WordReveal
+                  as="p"
+                  text={`“${t.quote}”`}
+                  className="font-display text-xl text-cream/90 leading-relaxed italic"
+                  stagger={0.03}
+                  amount={0.4}
+                />
                 <footer className="mt-6 eyebrow text-gold-300/80">
                   {t.name}
                 </footer>
