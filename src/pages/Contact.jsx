@@ -47,6 +47,7 @@ export default function Contact() {
           muted
           loop
           playsInline
+          aria-hidden="true"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/45 to-ink-950/60" />
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">

@@ -184,6 +184,7 @@ export default function Home() {
           muted
           loop
           playsInline
+          aria-hidden="true"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/40 to-ink-950/70" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/60" />
@@ -257,6 +258,7 @@ export default function Home() {
                 muted
                 loop
                 playsInline
+                aria-hidden="true"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/10 to-transparent" />
               <div className="absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_70%_75%,rgba(212,162,74,0.35),transparent_55%)]" />

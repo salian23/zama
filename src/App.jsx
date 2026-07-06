@@ -6,6 +6,7 @@ import ScrollToTop from './components/ScrollToTop'
 import CustomCursor from './components/CustomCursor'
 import PageCurtain from './components/PageCurtain'
 import ScrollProgress from './components/ScrollProgress'
+import LeafRain from './components/LeafRain'
 import useSmoothScroll from './hooks/useSmoothScroll'
 import { IntroContext } from './context/IntroContext'
 
@@ -16,10 +17,22 @@ const Shop = lazy(() => import('./pages/Shop'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
 
+const PAGE_TITLES = {
+  '/': 'Beth Tea — A Cinematic Tea House',
+  '/shop': 'The Menu — Beth Tea',
+  '/about': 'Our Story — Beth Tea',
+  '/contact': 'Contact — Beth Tea',
+}
+
 export default function App() {
   const location = useLocation()
   useSmoothScroll()
   const [introDone, setIntroDone] = useState(false)
+
+  // Per-route document title for SEO / browser tabs / shared links.
+  useEffect(() => {
+    document.title = PAGE_TITLES[location.pathname] || 'Beth Tea'
+  }, [location.pathname])
 
   // Hold the inline boot-loader briefly for a deliberate arrival, then lift
   // it and start the hero's choreographed entrance in sync.
@@ -41,6 +54,7 @@ export default function App() {
       <div className="relative bg-ink-950 min-h-screen">
         <CustomCursor />
         <ScrollProgress />
+        <LeafRain />
         <PageCurtain />
         <div className="film-grain" />
         <div className="vignette" />

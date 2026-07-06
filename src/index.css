@@ -10,6 +10,30 @@
   box-sizing: border-box;
 }
 
+/* Keyboard focus: a clear gold ring for accessibility, only for keyboard
+   users (not mouse clicks). */
+:focus-visible {
+  outline: 2px solid #d4a24a;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Respect reduced-motion: calm the ambient animations and long transitions
+   for visitors who ask for less movement. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .film-grain {
+    animation: none !important;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
