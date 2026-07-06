@@ -68,6 +68,16 @@ const TESTIMONIALS = [
   },
 ]
 
+const UGC = [
+  {
+    video: '/videos/ugc-1.mp4',
+    poster: '/images/ugc-1-poster.jpg',
+    name: 'Elise',
+    handle: '@slow.mornings',
+    caption: 'My whole morning slowed down the day this arrived.',
+  },
+]
+
 export default function Home() {
   const heroRef = useRef(null)
   const featured = PRODUCTS.slice(0, 4)
@@ -285,6 +295,48 @@ export default function Home() {
                   {t.name}
                 </footer>
               </motion.blockquote>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative px-6 md:px-10 py-28">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading eyebrow="Real Rituals" title="Loved by Quiet Mornings" />
+          <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {UGC.map((u, i) => (
+              <motion.figure
+                key={u.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative overflow-hidden rounded-2xl border border-cream/10 bg-ink-800/50"
+              >
+                <div className="relative aspect-[3/4] overflow-hidden">
+                  <video
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src={u.video}
+                    poster={u.poster}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/10 to-transparent" />
+                  <span className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-ink-950/40 px-3 py-1 text-[10px] uppercase tracking-widest2 text-cream/80 backdrop-blur-sm">
+                    <span className="h-1.5 w-1.5 rounded-full bg-red-400" /> Real customer
+                  </span>
+                  <figcaption className="absolute bottom-0 left-0 right-0 p-6">
+                    <p className="font-display text-xl text-cream leading-snug">
+                      &ldquo;{u.caption}&rdquo;
+                    </p>
+                    <p className="mt-3 text-sm text-gold-300/90">
+                      {u.name} <span className="text-cream/40">· {u.handle}</span>
+                    </p>
+                  </figcaption>
+                </div>
+              </motion.figure>
             ))}
           </div>
         </div>
