@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import TeaScene from '../components/three/TeaScene'
 import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
@@ -72,11 +72,25 @@ export default function Home() {
   const featured = PRODUCTS.slice(0, 4)
   const introDone = useIntroDone()
 
+  // Scroll-to-brew: a warm amber glow deepens over the hero as it scrolls,
+  // so the cup visibly "steeps" alongside the thickening steam.
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+  const warmth = useTransform(heroProgress, [0, 1], [0, 0.55])
+
   return (
     <main className="relative">
       <section ref={heroRef} className="relative h-[150vh]">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           <TeaScene sectionRef={heroRef} className="absolute inset-0" />
+
+          <motion.div
+            aria-hidden="true"
+            style={{ opacity: warmth }}
+            className="pointer-events-none absolute inset-0 mix-blend-soft-light bg-[radial-gradient(ellipse_at_50%_60%,rgba(212,162,74,0.9),rgba(126,84,38,0.4)_45%,transparent_75%)]"
+          />
 
           <motion.div
             variants={heroContainer}

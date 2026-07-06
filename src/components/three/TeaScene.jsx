@@ -139,7 +139,7 @@ export default function TeaScene({ sectionRef, className = '' }) {
               position={[0, portrait ? -1.7 : -0.35, 0]}
             >
               <TeaCupModel targetSize={2.7} position={[0, 0, 0]} rotationY={-0.4} />
-              <Steam position={[0, 1.6, 0]} height={2.4} />
+              <Steam position={[0, 1.6, 0]} height={2.4} progressRef={scrollProgress} />
               <Leaves radius={2.9} center={[0, 1.4, 0]} />
             </group>
           </CameraRig>
