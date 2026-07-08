@@ -121,6 +121,69 @@ body {
   }
 }
 
+/* Cinematic colour grade — teal-leaning shadows and a warm highlight bloom,
+   laid over the whole site with a soft-light blend for a filmic depth. */
+.color-grade {
+  position: fixed;
+  inset: 0;
+  z-index: 54;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background:
+    linear-gradient(180deg, rgba(90, 130, 140, 0.14) 0%, transparent 42%),
+    linear-gradient(0deg, rgba(20, 45, 50, 0.28) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 32%, rgba(240, 205, 145, 0.14), transparent 60%);
+}
+
+/* Candle-in-the-room spotlight that tracks the cursor. */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 53;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    340px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(212, 162, 74, 0.1),
+    rgba(212, 162, 74, 0.04) 40%,
+    transparent 68%
+  );
+}
+
+/* Welcome ritual — the "seated" arrival scene. */
+.ritual-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+}
+.ritual-cup {
+  position: relative;
+  width: 44px;
+  height: 38px;
+  flex: none;
+  border: 1.5px solid rgba(244, 236, 218, 0.45);
+  border-top-width: 2px;
+  border-radius: 6px 6px 42% 42% / 6px 6px 60% 60%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.15);
+}
+.ritual-liquid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18%;
+  opacity: 0.9;
+  transition: height 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ritual-card:hover .ritual-liquid,
+.ritual-card:focus-visible .ritual-liquid {
+  height: 82%;
+}
+
 /* Living ambient light — drifting colour fields that add slow depth to every
    section. `screen` blend means it only lifts the darks; it never dulls text. */
 .ambient-aura {

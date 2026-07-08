@@ -5,6 +5,7 @@ import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
 import ProductCard from '../components/ui/ProductCard'
 import Parallax from '../components/ui/Parallax'
+import FocusReveal from '../components/ui/FocusReveal'
 import WordReveal from '../components/ui/WordReveal'
 import RitualSequence from '../components/RitualSequence'
 import { useIntroDone } from '../context/IntroContext'
@@ -179,16 +180,18 @@ export default function Home() {
 
       {/* Full-bleed cinematic pour banner */}
       <section className="relative h-[70vh] min-h-[440px] w-full overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src="/videos/tea-pour.mp4"
-          poster="/images/tea-pour-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
+        <Parallax speed={70} className="absolute inset-x-0 -inset-y-[14%]">
+          <video
+            className="h-full w-full object-cover"
+            src="/videos/tea-pour.mp4"
+            poster="/images/tea-pour-poster.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          />
+        </Parallax>
         <div className="absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/40 to-ink-950/70" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/60" />
 
@@ -349,13 +352,7 @@ export default function Home() {
 
       <section className="relative px-6 md:px-10 py-32 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,162,74,0.12),transparent_60%)]" />
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8 }}
-          className="relative mx-auto max-w-3xl text-center"
-        >
+        <FocusReveal amount={0.5} className="relative mx-auto max-w-3xl text-center">
           <h2 className="font-display text-4xl md:text-6xl text-cream leading-tight">
             Your next quiet moment
             <br /> is one pour away.
@@ -363,7 +360,7 @@ export default function Home() {
           <div className="mt-10">
             <Button to="/shop">Shop the Collection</Button>
           </div>
-        </motion.div>
+        </FocusReveal>
       </section>
     </main>
   )

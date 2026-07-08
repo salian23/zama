@@ -5,6 +5,8 @@ import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import CustomCursor from './components/CustomCursor'
 import AmbientAura from './components/AmbientAura'
+import Spotlight from './components/Spotlight'
+import WelcomeRitual from './components/WelcomeRitual'
 import PageCurtain from './components/PageCurtain'
 import ScrollProgress from './components/ScrollProgress'
 import LeafRain from './components/LeafRain'
@@ -54,10 +56,13 @@ export default function App() {
     <IntroContext.Provider value={introDone}>
       <div className="relative bg-ink-950 min-h-screen">
         <AmbientAura />
+        <Spotlight />
         <CustomCursor />
         <ScrollProgress />
         <LeafRain />
         <PageCurtain />
+        <WelcomeRitual />
+        <div className="color-grade" />
         <div className="film-grain" />
         <div className="vignette" />
         <Navbar />
