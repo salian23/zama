@@ -121,6 +121,93 @@ body {
   }
 }
 
+/* Living ambient light — drifting colour fields that add slow depth to every
+   section. `screen` blend means it only lifts the darks; it never dulls text. */
+.ambient-aura {
+  position: fixed;
+  inset: -25vmax;
+  z-index: 52;
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+.aura-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+.aura-blob--gold {
+  top: -10%;
+  left: -5%;
+  width: 48vmax;
+  height: 48vmax;
+  background: radial-gradient(circle, rgba(212, 162, 74, 0.5), transparent 62%);
+  animation: auraDriftA 38s ease-in-out infinite;
+}
+.aura-blob--tea {
+  bottom: -15%;
+  right: -8%;
+  width: 42vmax;
+  height: 42vmax;
+  background: radial-gradient(circle, rgba(69, 98, 51, 0.55), transparent 62%);
+  animation: auraDriftB 47s ease-in-out infinite;
+}
+.aura-blob--ember {
+  top: 35%;
+  left: 45%;
+  width: 30vmax;
+  height: 30vmax;
+  background: radial-gradient(circle, rgba(126, 84, 38, 0.5), transparent 62%);
+  animation: auraDriftC 55s ease-in-out infinite;
+}
+@keyframes auraDriftA {
+  0%,
+  100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(14vw, 10vh) scale(1.12); }
+}
+@keyframes auraDriftB {
+  0%,
+  100% { transform: translate(0, 0) scale(1.05); }
+  50% { transform: translate(-12vw, -8vh) scale(0.9); }
+}
+@keyframes auraDriftC {
+  0%,
+  100% { transform: translate(0, 0) scale(0.95); }
+  50% { transform: translate(-9vw, 12vh) scale(1.15); }
+}
+
+/* Volumetric god-rays — thin shafts of light fanning down from the hero's
+   key light, drifting gently as if dust catches the beam. Scoped to the hero. */
+.god-rays {
+  position: absolute;
+  inset: -60% -30% -30%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+  transform-origin: 50% 0%;
+  background: conic-gradient(
+    from 92deg at 50% 0%,
+    transparent 0deg,
+    rgba(244, 236, 218, 0.07) 4deg,
+    transparent 8deg,
+    transparent 15deg,
+    rgba(212, 162, 74, 0.06) 19deg,
+    transparent 24deg,
+    transparent 32deg,
+    rgba(244, 236, 218, 0.05) 36deg,
+    transparent 41deg
+  );
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 72%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 72%);
+  animation: rayDrift 24s ease-in-out infinite alternate;
+}
+@keyframes rayDrift {
+  0% { transform: rotate(-3deg) scale(1); opacity: 0.45; }
+  100% { transform: rotate(3deg) scale(1.06); opacity: 0.7; }
+}
+
 .cursor-glow {
   position: fixed;
   top: 0;

@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import CustomCursor from './components/CustomCursor'
+import AmbientAura from './components/AmbientAura'
 import PageCurtain from './components/PageCurtain'
 import ScrollProgress from './components/ScrollProgress'
 import LeafRain from './components/LeafRain'
@@ -52,6 +53,7 @@ export default function App() {
   return (
     <IntroContext.Provider value={introDone}>
       <div className="relative bg-ink-950 min-h-screen">
+        <AmbientAura />
         <CustomCursor />
         <ScrollProgress />
         <LeafRain />

@@ -98,6 +98,9 @@ export default function Home() {
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           <TeaScene sectionRef={heroRef} className="absolute inset-0" />
 
+          {/* Volumetric shafts of light drifting down over the centerpiece */}
+          <div className="god-rays" aria-hidden="true" />
+
           <motion.div
             aria-hidden="true"
             style={{ opacity: warmth }}
