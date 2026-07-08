@@ -102,10 +102,12 @@ export default function LayeredHero({
         }}
       />
 
-      {/* Headline plane — sits between the scene and the floating cup. */}
+      {/* Headline plane — anchored in the dark left third so the cup can float
+          center-right without ever covering the type. Kept in front (z-30) for
+          guaranteed legibility. */}
       <div
         ref={contentRef}
-        className="relative z-10 flex h-full flex-col items-center justify-start pt-16 sm:pt-20 px-6 text-center will-change-transform"
+        className="relative z-30 flex h-full max-w-2xl flex-col items-start justify-center px-6 sm:px-12 md:px-20 text-left will-change-transform"
       >
         {children}
       </div>

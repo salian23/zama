@@ -18,8 +18,8 @@ export default function Shop() {
   return (
     <main className="relative">
       <LayeredHero
-        image="/images/shop-hero.jpg"
-        cutout="/images/shop-hero-cup.png"
+        image="/images/shop-hero.webp"
+        cutout="/images/shop-hero-cup.webp"
         className="h-[70vh] min-h-[520px]"
       >
         <motion.span
