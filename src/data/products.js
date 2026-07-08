@@ -2,15 +2,16 @@ export const CATEGORIES = ['All', 'Black', 'Green', 'Oolong', 'White', 'Herbal']
 
 export const PRODUCTS = [
   {
-    id: 'amber-dusk',
-    name: 'Amber Dusk',
+    id: 'first-flush',
+    name: 'First Flush',
     category: 'Black',
-    price: 28,
+    price: 34,
     description:
-      'A malty Yunnan black leaf finished with a whisper of smoked honey. Steeps into a deep copper cup.',
-    notes: ['Malt', 'Honey', 'Cacao'],
-    gradient: 'linear-gradient(160deg, #5f3f22 0%, #2a1a10 70%)',
-    accent: '#d4a24a',
+      "The season's very first Darjeeling pluck — light, brisk and unmistakably muscatel, with a floral lift only spring can give.",
+    notes: ['Muscatel', 'Floral', 'Brisk'],
+    image: '/images/tea-first-flush.webp',
+    gradient: 'linear-gradient(160deg, #b9923f 0%, #3a2c12 70%)',
+    accent: '#e3ba69',
     model3d: '/models/tea-tin.glb',
   },
   {

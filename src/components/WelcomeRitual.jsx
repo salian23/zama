@@ -20,7 +20,7 @@ const SALUTATION = {
 }
 
 // Three house signatures — one bright, one delicate, one deep.
-const TRIO = ['jade-mist', 'silver-needle', 'amber-dusk']
+const TRIO = ['jade-mist', 'silver-needle', 'first-flush']
 
 export default function WelcomeRitual() {
   const introDone = useIntroDone()

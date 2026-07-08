@@ -5,6 +5,10 @@ import Product3DViewer from '../three/Product3DViewer'
 export default function ProductCard({ product }) {
   const [added, setAdded] = useState(false)
   const [viewer, setViewer] = useState(false)
+  // If a product photo hasn't been added yet (or fails to load), fall back to
+  // the colour gradient instead of showing a broken-image glyph.
+  const [imgOk, setImgOk] = useState(true)
+  const showImage = product.image && imgOk
 
   // Cursor-following 3D tilt (desktop only).
   const px = useMotionValue(0.5)
@@ -44,8 +48,17 @@ export default function ProductCard({ product }) {
     >
       <div
         className="relative h-64 w-full overflow-hidden"
-        style={{ background: product.gradient }}
+        style={showImage ? undefined : { background: product.gradient }}
       >
+        {showImage && (
+          <img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            onError={() => setImgOk(false)}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent" />
         <div className="film-grain-local absolute inset-0 opacity-20 mix-blend-overlay" />
         <span className="absolute top-4 left-4 eyebrow text-cream/80 bg-ink-950/40 px-3 py-1 rounded-full backdrop-blur-sm">
