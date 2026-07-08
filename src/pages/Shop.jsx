@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import LeafAccent from '../components/three/LeafAccent'
+import LayeredHero from '../components/LayeredHero'
 import ProductCard from '../components/ui/ProductCard'
 import { CATEGORIES, PRODUCTS } from '../data/products'
 
@@ -17,35 +17,36 @@ export default function Shop() {
 
   return (
     <main className="relative">
-      <section className="relative h-[65vh] min-h-[480px] w-full overflow-hidden">
-        <LeafAccent className="absolute inset-0" />
-        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="eyebrow text-gold-300 mb-6"
-          >
-            The Full Collection
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15 }}
-            className="font-display text-5xl md:text-7xl text-cream"
-          >
-            The Menu
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3 }}
-            className="mt-5 max-w-xl text-cream/60"
-          >
-            Nine leaves, four regions, one unhurried standard.
-          </motion.p>
-        </div>
-      </section>
+      <LayeredHero
+        image="/images/shop-hero.jpg"
+        cutout="/images/shop-hero-cup.png"
+        className="h-[70vh] min-h-[520px]"
+      >
+        <motion.span
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="eyebrow text-gold-300 mb-6"
+        >
+          The Full Collection
+        </motion.span>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.15 }}
+          className="font-display text-5xl md:text-7xl text-cream drop-shadow-[0_2px_20px_rgba(0,0,0,0.6)]"
+        >
+          The Menu
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.3 }}
+          className="mt-5 max-w-xl text-cream/70 drop-shadow-[0_1px_10px_rgba(0,0,0,0.7)]"
+        >
+          Nine leaves, four regions, one unhurried standard.
+        </motion.p>
+      </LayeredHero>
 
       <section className="relative px-6 md:px-10 py-20">
         <div className="mx-auto max-w-7xl">
