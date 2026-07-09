@@ -27,14 +27,14 @@ export default function ShopBackground({ image }) {
       ty = e.clientY / window.innerHeight
     }
     const render = () => {
-      cx += (tx - cx) * 0.045
-      cy += (ty - cy) * 0.045
-      // Over-scale and let the transform-origin chase the cursor, so the
-      // leaves pan and zoom toward wherever you point.
-      img.style.transform = 'scale(1.26)'
+      cx += (tx - cx) * 0.06
+      cy += (ty - cy) * 0.06
+      // Over-scale hard and let the transform-origin chase the cursor, so the
+      // leaves zoom and sweep dramatically toward wherever you point.
+      img.style.transform = 'scale(1.55)'
       img.style.transformOrigin = `${cx * 100}% ${cy * 100}%`
       if (glow) {
-        glow.style.background = `radial-gradient(38vmax circle at ${cx * 100}% ${cy * 100}%, rgba(212,162,74,0.16), transparent 60%)`
+        glow.style.background = `radial-gradient(42vmax circle at ${cx * 100}% ${cy * 100}%, rgba(212,162,74,0.22), transparent 62%)`
       }
       raf = requestAnimationFrame(render)
     }
@@ -56,16 +56,16 @@ export default function ShopBackground({ image }) {
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'brightness(0.42) saturate(1.05)',
-          transform: 'scale(1.26)',
+          filter: 'brightness(0.62) saturate(1.08)',
+          transform: 'scale(1.55)',
           transformOrigin: 'center',
         }}
       />
       {/* warm cursor glow */}
       <div ref={glowRef} className="absolute inset-0 mix-blend-screen" />
-      {/* darkening + vignette for text legibility */}
-      <div className="absolute inset-0 bg-ink-950/72" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(7,8,10,0.9)_100%)]" />
+      {/* lighter darkening + vignette — leaves stay visible, text still legible */}
+      <div className="absolute inset-0 bg-ink-950/48" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,rgba(7,8,10,0.78)_100%)]" />
     </div>
   )
 }
