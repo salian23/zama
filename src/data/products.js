@@ -97,8 +97,9 @@ export const PRODUCTS = [
     category: 'Black',
     price: 26,
     description:
-      'Classic bergamot Earl Grey deepened with a whisper of vanilla and blue cornflower.',
-    notes: ['Bergamot', 'Vanilla', 'Floral'],
+      'Classic bergamot Earl Grey, lifted with bright citrus oil and a scatter of blue cornflower.',
+    notes: ['Bergamot', 'Cornflower', 'Citrus'],
+    image: '/images/tea-midnight-earl.webp',
     gradient: 'linear-gradient(160deg, #354c29 0%, #0d150c 75%)',
     accent: '#a2bf85',
   },
