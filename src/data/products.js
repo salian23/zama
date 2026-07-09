@@ -102,4 +102,16 @@ export const PRODUCTS = [
     gradient: 'linear-gradient(160deg, #354c29 0%, #0d150c 75%)',
     accent: '#a2bf85',
   },
+  {
+    id: 'velvet-night',
+    name: 'Velvet Night',
+    category: 'Black',
+    price: 27,
+    description:
+      'A smooth, full-bodied black leaf that steeps deep and dark — rounded malt over cocoa, with a long molasses finish.',
+    notes: ['Malt', 'Cocoa', 'Molasses'],
+    image: '/images/tea-velvet-night.webp',
+    gradient: 'linear-gradient(160deg, #3a2419 0%, #120a06 75%)',
+    accent: '#d4a24a',
+  },
 ]
