@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import LayeredHero from '../components/LayeredHero'
+import ShopBackground from '../components/ShopBackground'
 import ProductCard from '../components/ui/ProductCard'
 import { CATEGORIES, PRODUCTS } from '../data/products'
 
@@ -17,10 +18,11 @@ export default function Shop() {
 
   return (
     <main className="relative">
+      <ShopBackground image="/images/shop-leaf-bg.webp" />
       <LayeredHero
         image="/images/shop-hero.webp"
         cutout="/images/shop-hero-cup.webp"
-        className="h-[70vh] min-h-[520px]"
+        className="relative z-10 h-[70vh] min-h-[520px]"
       >
         <motion.span
           initial={{ opacity: 0, y: 12 }}
@@ -48,7 +50,7 @@ export default function Shop() {
         </motion.p>
       </LayeredHero>
 
-      <section className="relative px-6 md:px-10 py-20">
+      <section className="relative z-10 px-6 md:px-10 py-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
             {CATEGORIES.map((cat) => (

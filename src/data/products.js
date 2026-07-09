@@ -10,7 +10,6 @@ export const PRODUCTS = [
       "The season's very first Darjeeling pluck — light, brisk and unmistakably muscatel, with a floral lift only spring can give.",
     notes: ['Muscatel', 'Floral', 'Brisk'],
     image: '/images/tea-first-flush.webp',
-    zoom: true,
     gradient: 'linear-gradient(160deg, #b9923f 0%, #3a2c12 70%)',
     accent: '#e3ba69',
     model3d: '/models/tea-tin.glb',
