@@ -315,3 +315,45 @@ body {
   font-size: 0.7rem;
   font-weight: 600;
 }
+
+/* Hover-to-zoom loupe: specular highlight, focus vignette and a one-shot
+   sheen sweep that rakes light across the leaf when the zoom engages. */
+.magnify-gloss {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  mix-blend-mode: screen;
+}
+.magnify-vignette {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  background: radial-gradient(circle at center, transparent 50%, rgba(0, 0, 0, 0.45) 100%);
+}
+.magnify.is-zoom .magnify-gloss,
+.magnify.is-zoom .magnify-vignette {
+  opacity: 1;
+}
+.magnify::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: screen;
+  background: linear-gradient(
+    115deg,
+    transparent 34%,
+    rgba(255, 255, 255, 0.28) 48%,
+    rgba(255, 246, 214, 0.32) 52%,
+    transparent 64%
+  );
+  transform: translateX(-130%);
+  opacity: 0;
+}
+.magnify.is-zoom::after {
+  animation: sheenSweep 0.9s ease-out;
+}
+@keyframes sheenSweep {
+  0% { transform: translateX(-130%); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translateX(130%); opacity: 0; }
+}

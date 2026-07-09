@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Product3DViewer from '../three/Product3DViewer'
+import MagnifyImage from './MagnifyImage'
 
 export default function ProductCard({ product }) {
   const [added, setAdded] = useState(false)
@@ -50,7 +51,10 @@ export default function ProductCard({ product }) {
         className="relative h-64 w-full overflow-hidden"
         style={showImage ? undefined : { background: product.gradient }}
       >
-        {showImage && (
+        {showImage && product.zoom && (
+          <MagnifyImage src={product.image} alt={product.name} />
+        )}
+        {showImage && !product.zoom && (
           <img
             src={product.image}
             alt={product.name}
@@ -59,8 +63,8 @@ export default function ProductCard({ product }) {
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent" />
-        <div className="film-grain-local absolute inset-0 opacity-20 mix-blend-overlay" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent" />
+        <div className="film-grain-local pointer-events-none absolute inset-0 opacity-20 mix-blend-overlay" />
         <span className="absolute top-4 left-4 eyebrow text-cream/80 bg-ink-950/40 px-3 py-1 rounded-full backdrop-blur-sm">
           {product.category}
         </span>
@@ -73,7 +77,7 @@ export default function ProductCard({ product }) {
           </button>
         )}
         <div
-          className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full opacity-40 blur-2xl transition-transform duration-700 group-hover:scale-125"
+          className="pointer-events-none absolute -bottom-10 -right-10 h-40 w-40 rounded-full opacity-40 blur-2xl transition-transform duration-700 group-hover:scale-125"
           style={{ background: product.accent }}
         />
       </div>
