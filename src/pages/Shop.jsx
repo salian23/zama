@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import LayeredHero from '../components/LayeredHero'
-import ShopBackground from '../components/ShopBackground'
+import LeafBackground from '../components/LeafBackground'
 import ProductCard from '../components/ui/ProductCard'
 import { CATEGORIES, PRODUCTS } from '../data/products'
 
@@ -18,7 +18,7 @@ export default function Shop() {
 
   return (
     <main className="relative">
-      <ShopBackground image="/images/shop-leaf-bg.webp" />
+      <LeafBackground image="/images/shop-leaf-bg.webp" ease={0.06} />
       <LayeredHero
         image="/images/shop-hero.webp"
         cutout="/images/shop-hero-cup.webp"

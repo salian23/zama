@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import TeaScene from '../components/three/TeaScene'
+import LeafBackground from '../components/LeafBackground'
 import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
 import ProductCard from '../components/ui/ProductCard'
@@ -95,8 +96,10 @@ export default function Home() {
 
   return (
     <main className="relative">
+      <LeafBackground image="/images/home-leaf-bg.webp" ease={0.035} />
+      <div className="relative z-10">
       <section ref={heroRef} className="relative h-[150vh]">
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <div className="sticky top-0 h-screen w-full overflow-hidden bg-ink-950">
           <TeaScene sectionRef={heroRef} className="absolute inset-0" />
 
           {/* Volumetric shafts of light drifting down over the centerpiece */}
@@ -159,7 +162,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative bg-ink-950 px-6 md:px-10 py-28">
+      <section className="relative bg-ink-950/55 px-6 md:px-10 py-28">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="This Season's Harvest"
@@ -279,7 +282,7 @@ export default function Home() {
         steps={STEPS}
       />
 
-      <section className="relative bg-ink-900 px-6 md:px-10 py-28">
+      <section className="relative bg-ink-900/55 px-6 md:px-10 py-28">
         <div className="mx-auto max-w-7xl">
           <SectionHeading eyebrow="Whispers From Our Table" title="Kind Words" />
           <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -362,6 +365,7 @@ export default function Home() {
           </div>
         </FocusReveal>
       </section>
+      </div>
     </main>
   )
 }
