@@ -18,7 +18,7 @@ export default function Shop() {
 
   return (
     <main className="relative">
-      <LeafBackground image="/images/shop-leaf-bg.webp" ease={0.06} />
+      <LeafBackground image="/images/shop-leaf-bg.webp" ease={0.06} scale={1.18} />
       <LayeredHero
         image="/images/shop-hero.webp"
         cutout="/images/shop-hero-cup.webp"
@@ -70,7 +70,7 @@ export default function Shop() {
 
           <motion.div
             layout
-            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4"
           >
             {filtered.map((p) => (
               <ProductCard key={p.id} product={p} />
