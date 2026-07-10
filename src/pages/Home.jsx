@@ -61,7 +61,13 @@ const UGC = [
 export default function Home() {
   return (
     <main className="relative">
-      <LeafBackground image="/images/home-leaf-bg.webp" ease={0.03} scale={1.14} />
+      <LeafBackground
+        image="/images/home-leaf-bg.webp"
+        staticImage
+        scale={1.04}
+        edges="/images/home-leaf-edges.png"
+        edgeColor="#3fe6b3"
+      />
       <div className="relative z-10">
       {/* Minimal hero: the fixed leaf background shows through this transparent
           panel (no 3D cup, no words — placeholder while the top is reworked). */}
