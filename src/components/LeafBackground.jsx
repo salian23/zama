@@ -18,6 +18,7 @@ export default function LeafBackground({
 }) {
   const imgRef = useRef(null)
   const glowRef = useRef(null)
+  const revealRef = useRef(null)
 
   useEffect(() => {
     if (staticImage) return
@@ -67,6 +68,57 @@ export default function LeafBackground({
     }
   }, [scale, ease, staticImage])
 
+  // Touch-reveal (phones only): the glow lights up around the finger and fades
+  // when not touching, so the real leaf is visible by default. Desktop keeps
+  // its constant glow untouched.
+  useEffect(() => {
+    if (!edges) return undefined
+    const el = revealRef.current
+    if (!el) return undefined
+    if (!window.matchMedia('(pointer: coarse)').matches) return undefined
+
+    let tx = 50
+    let ty = 50
+    let cx = 50
+    let cy = 50
+    let act = 0
+    let ca = 0
+    let raf = 0
+
+    const onTouch = (e) => {
+      const t = e.touches && e.touches[0]
+      if (!t) return
+      tx = (t.clientX / window.innerWidth) * 100
+      ty = (t.clientY / window.innerHeight) * 100
+      act = 1
+    }
+    const end = () => {
+      act = 0
+    }
+    const render = () => {
+      cx += (tx - cx) * 0.2
+      cy += (ty - cy) * 0.2
+      ca += (act - ca) * 0.1
+      el.style.setProperty('--mx', `${cx}%`)
+      el.style.setProperty('--my', `${cy}%`)
+      el.style.setProperty('--reveal-op', ca.toFixed(3))
+      raf = requestAnimationFrame(render)
+    }
+
+    window.addEventListener('touchstart', onTouch, { passive: true })
+    window.addEventListener('touchmove', onTouch, { passive: true })
+    window.addEventListener('touchend', end)
+    window.addEventListener('touchcancel', end)
+    raf = requestAnimationFrame(render)
+    return () => {
+      window.removeEventListener('touchstart', onTouch)
+      window.removeEventListener('touchmove', onTouch)
+      window.removeEventListener('touchend', end)
+      window.removeEventListener('touchcancel', end)
+      cancelAnimationFrame(raf)
+    }
+  }, [edges])
+
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
       <div
@@ -88,7 +140,7 @@ export default function LeafBackground({
       {/* "Living light" traced along the leaf edges: a constant soft rim glow
           plus a bright band that flows along the contours. */}
       {edges && (
-        <>
+        <div ref={revealRef} className="leaf-edge-reveal">
           {/* wide bloom that bleeds the glow out into the surroundings */}
           <div className="leaf-edge-bloom">
             <div
@@ -116,7 +168,7 @@ export default function LeafBackground({
               backgroundImage: `linear-gradient(115deg, transparent 40%, ${edgeColor} 50%, transparent 60%)`,
             }}
           />
-        </>
+        </div>
       )}
     </div>
   )

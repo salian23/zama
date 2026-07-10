@@ -316,6 +316,34 @@ body {
   font-weight: 600;
 }
 
+/* Wrapper for the edge-glow layers. On desktop it's fully visible (constant
+   glow). On phones it becomes a torch that reveals the glow only around the
+   finger (position + opacity driven by JS), so the real leaf shows otherwise. */
+.leaf-edge-reveal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+@media (pointer: coarse), (max-width: 768px) {
+  .leaf-edge-reveal {
+    opacity: var(--reveal-op, 0);
+    -webkit-mask-image: radial-gradient(
+      32vmax circle at var(--mx, 50%) var(--my, 50%),
+      #000 0%,
+      #000 38%,
+      transparent 78%
+    );
+    mask-image: radial-gradient(
+      32vmax circle at var(--mx, 50%) var(--my, 50%),
+      #000 0%,
+      #000 38%,
+      transparent 78%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+}
+
 /* "Living light" on the leaf edges — masked to an edge map, a constant soft
    rim glow (gently pulsing) plus a bright band that flows along the contours. */
 .leaf-edge-glow,
