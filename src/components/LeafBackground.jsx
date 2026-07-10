@@ -13,6 +13,7 @@ export default function LeafBackground({
   overlay = 0.48,
   edges = null,
   edgeColor = '#3fe6b3',
+  edgeGradient = null,
   staticImage = false,
 }) {
   const imgRef = useRef(null)
@@ -93,7 +94,7 @@ export default function LeafBackground({
             style={{
               WebkitMaskImage: `url(${edges})`,
               maskImage: `url(${edges})`,
-              background: edgeColor,
+              background: edgeGradient || edgeColor,
             }}
           />
           <div

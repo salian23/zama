@@ -66,7 +66,8 @@ export default function Home() {
         staticImage
         scale={1.04}
         edges="/images/home-leaf-edges.png"
-        edgeColor="#3fe6b3"
+        edgeColor="#e6b45a"
+        edgeGradient="linear-gradient(120deg, #35c9e0 0%, #57d9c0 40%, #e6b45a 100%)"
       />
       <div className="relative z-10">
       {/* Minimal hero: the fixed leaf background shows through this transparent
