@@ -1,6 +1,4 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import TeaScene from '../components/three/TeaScene'
+import { motion } from 'framer-motion'
 import LeafBackground from '../components/LeafBackground'
 import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
@@ -8,24 +6,6 @@ import Parallax from '../components/ui/Parallax'
 import FocusReveal from '../components/ui/FocusReveal'
 import WordReveal from '../components/ui/WordReveal'
 import RitualSequence from '../components/RitualSequence'
-import { useIntroDone } from '../context/IntroContext'
-import { getTimeOfDay } from '../lib/timeOfDay'
-
-// Choreographed hero entrance — items rise and un-blur in sequence once the
-// preloader curtain lifts, for a deliberate, premium reveal.
-const heroContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.14, delayChildren: 0.15 } },
-}
-const heroItem = {
-  hidden: { opacity: 0, y: 26, filter: 'blur(8px)' },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] },
-  },
-}
 
 const STEPS = [
   {
@@ -79,84 +59,21 @@ const UGC = [
 ]
 
 export default function Home() {
-  const heroRef = useRef(null)
-  const introDone = useIntroDone()
-  const greeting = getTimeOfDay().greeting
-
-  // Scroll-to-brew: a warm amber glow deepens over the hero as it scrolls,
-  // so the cup visibly "steeps" alongside the thickening steam.
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  })
-  const warmth = useTransform(heroProgress, [0, 1], [0, 0.55])
-
   return (
     <main className="relative">
       <LeafBackground image="/images/home-leaf-bg.webp" ease={0.035} />
       <div className="relative z-10">
-      <section ref={heroRef} className="relative h-[150vh]">
-        <div className="sticky top-0 h-screen w-full overflow-hidden bg-ink-950">
-          <TeaScene sectionRef={heroRef} className="absolute inset-0" />
-
-          {/* Volumetric shafts of light drifting down over the centerpiece */}
-          <div className="god-rays" aria-hidden="true" />
-
-          <motion.div
-            aria-hidden="true"
-            style={{ opacity: warmth }}
-            className="pointer-events-none absolute inset-0 mix-blend-soft-light bg-[radial-gradient(ellipse_at_50%_60%,rgba(212,162,74,0.9),rgba(126,84,38,0.4)_45%,transparent_75%)]"
-          />
-
-          <motion.div
-            variants={heroContainer}
-            initial="hidden"
-            animate={introDone ? 'show' : 'hidden'}
-            className="pointer-events-none absolute inset-0 flex flex-col items-center justify-start pt-24 sm:justify-center sm:pt-0 px-6 text-center"
-          >
-            <motion.span
-              variants={heroItem}
-              className="eyebrow text-gold-300 mb-6"
-            >
-              {greeting} · steep slowly
-            </motion.span>
-            <motion.h1
-              variants={heroItem}
-              className="font-display text-5xl sm:text-7xl md:text-8xl leading-[0.95] text-cream max-w-4xl"
-            >
-              Steep Into
-              <br />
-              <span className="text-gold-400">Stillness</span>
-            </motion.h1>
-            <motion.p
-              variants={heroItem}
-              className="mt-6 max-w-xl text-cream/60 text-base md:text-lg"
-            >
-              Rare leaves, sourced from single gardens and poured with
-              intention. This is tea as a cinematic ritual, not a routine.
-            </motion.p>
-            <motion.div
-              variants={heroItem}
-              className="pointer-events-auto mt-10 flex flex-wrap items-center justify-center gap-4"
-            >
-              <Button to="/shop">Explore the Menu</Button>
-              <Button to="/about" variant="ghost">
-                Our Story
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-            className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          >
-            <span className="text-[10px] uppercase tracking-widest2 text-cream/40">
-              Scroll
-            </span>
-            <div className="h-10 w-px bg-gradient-to-b from-cream/50 to-transparent" />
-          </motion.div>
-        </div>
+      {/* Minimal hero: the fixed leaf background shows through this transparent
+          panel (no 3D cup, no words — placeholder while the top is reworked). */}
+      <section className="relative h-screen w-full overflow-hidden">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-950 to-transparent" />
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+          className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2"
+        >
+          <div className="h-10 w-px bg-gradient-to-b from-cream/50 to-transparent" />
+        </motion.div>
       </section>
 
       {/* Full-bleed cinematic pour banner */}
