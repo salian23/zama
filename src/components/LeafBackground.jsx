@@ -27,15 +27,26 @@ export default function LeafBackground({
     let ty = 0.5
     let cx = 0.5
     let cy = 0.5
+    let cs = scale
+    const start = performance.now()
+    const clamp = (v) => Math.max(0.08, Math.min(0.92, v))
 
     const onMove = (e) => {
       tx = e.clientX / window.innerWidth
       ty = e.clientY / window.innerHeight
     }
     const render = () => {
-      cx += (tx - cx) * ease
-      cy += (ty - cy) * ease
-      img.style.transform = `scale(${scale})`
+      const t = (performance.now() - start) / 1000
+      // Cinematic "breathing" zoom: the scale drifts slowly in and out, and
+      // the focal point glides on a slow path (Ken Burns), with a gentle
+      // cursor nudge on top — all heavily eased for a buttery, filmic push-in.
+      const targetScale = scale + Math.sin(t * 0.16) * 0.08
+      const fx = 0.5 + Math.sin(t * 0.07) * 0.16 + (tx - 0.5) * 0.35
+      const fy = 0.5 + Math.sin(t * 0.053 + 1.2) * 0.13 + (ty - 0.5) * 0.35
+      cx += (clamp(fx) - cx) * ease
+      cy += (clamp(fy) - cy) * ease
+      cs += (targetScale - cs) * 0.04
+      img.style.transform = `scale(${cs})`
       img.style.transformOrigin = `${cx * 100}% ${cy * 100}%`
       if (glow) {
         glow.style.background = `radial-gradient(42vmax circle at ${cx * 100}% ${cy * 100}%, rgba(212,162,74,0.22), transparent 62%)`
