@@ -337,9 +337,9 @@ body {
   animation: edgePulse 5s ease-in-out infinite;
 }
 .leaf-edge-flow {
-  background-size: 280% 280%;
-  opacity: 0.95;
-  animation: edgeFlow 7.5s linear infinite;
+  background-size: 300% 300%;
+  opacity: 0.45;
+  animation: edgeFlow 12s linear infinite;
 }
 @keyframes edgePulse {
   0%, 100% { opacity: 0.18; }
@@ -352,6 +352,12 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .leaf-edge-flow { animation: none; }
   .leaf-edge-glow { animation: none; opacity: 0.3; }
+}
+/* On touch / phones, drop the sweeping band entirely — keep only the steady
+   edge glow so nothing appears to "move around" on mobile. */
+@media (pointer: coarse), (max-width: 768px) {
+  .leaf-edge-flow { display: none; }
+  .leaf-edge-glow { animation: none; opacity: 0.32; }
 }
 
 /* Hover-to-zoom loupe: specular highlight, focus vignette and a one-shot

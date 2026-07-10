@@ -101,7 +101,7 @@ export default function LeafBackground({
             style={{
               WebkitMaskImage: `url(${edges})`,
               maskImage: `url(${edges})`,
-              backgroundImage: `linear-gradient(115deg, transparent 30%, ${edgeColor} 47%, #ffffff 50%, ${edgeColor} 53%, transparent 70%)`,
+              backgroundImage: `linear-gradient(115deg, transparent 40%, ${edgeColor} 50%, transparent 60%)`,
             }}
           />
         </>
