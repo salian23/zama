@@ -11,11 +11,14 @@ export default function ProductCard({ product }) {
   const [imgOk, setImgOk] = useState(true)
   const showImage = product.image && imgOk
 
-  // Cursor-following 3D tilt (desktop only).
+  // Cursor-following 3D tilt (desktop only). Pop-out cards tilt harder and
+  // lift toward the viewer, so the image feels like it's coming off the screen.
+  const pop = product.popOut
+  const tilt = pop ? 14 : 7
   const px = useMotionValue(0.5)
   const py = useMotionValue(0.5)
-  const rotateX = useSpring(useTransform(py, [0, 1], [7, -7]), { stiffness: 150, damping: 18 })
-  const rotateY = useSpring(useTransform(px, [0, 1], [-7, 7]), { stiffness: 150, damping: 18 })
+  const rotateX = useSpring(useTransform(py, [0, 1], [tilt, -tilt]), { stiffness: 150, damping: 18 })
+  const rotateY = useSpring(useTransform(px, [0, 1], [-tilt, tilt]), { stiffness: 150, damping: 18 })
 
   const finePointer =
     typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches
@@ -44,8 +47,21 @@ export default function ProductCard({ product }) {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-cream/10 bg-ink-800/60 backdrop-blur-sm"
+      style={{
+        rotateX,
+        rotateY,
+        transformPerspective: pop ? 1000 : 900,
+        transformStyle: 'preserve-3d',
+      }}
+      whileHover={
+        pop
+          ? { scale: 1.06, boxShadow: '0 45px 90px -25px rgba(0,0,0,0.8)', zIndex: 30 }
+          : undefined
+      }
+      transition={{ type: 'spring', stiffness: 200, damping: 22 }}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-cream/10 bg-ink-800/60 backdrop-blur-sm ${
+        pop ? 'hover:border-gold-400/50' : ''
+      }`}
     >
       <div
         className="relative h-64 w-full overflow-hidden"
@@ -60,7 +76,9 @@ export default function ProductCard({ product }) {
             alt={product.name}
             loading="lazy"
             onError={() => setImgOk(false)}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
+            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out ${
+              pop ? 'group-hover:scale-[1.18]' : 'group-hover:scale-110'
+            }`}
           />
         )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent" />
