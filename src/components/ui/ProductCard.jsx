@@ -56,9 +56,9 @@ export default function ProductCard({ product }) {
       whileHover={
         pop
           ? {
-              scale: 1.12,
-              y: -14,
-              boxShadow: '0 70px 120px -20px rgba(0,0,0,0.9), 0 0 60px -10px rgba(212,162,74,0.25)',
+              scale: 1.2,
+              y: -34,
+              boxShadow: '0 90px 150px -20px rgba(0,0,0,0.92), 0 0 80px -10px rgba(212,162,74,0.3)',
               zIndex: 30,
             }
           : undefined
