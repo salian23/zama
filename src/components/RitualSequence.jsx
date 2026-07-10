@@ -31,7 +31,7 @@ export default function RitualSequence({ eyebrow, title, steps }) {
   return (
     <section
       ref={ref}
-      className="relative bg-ink-950"
+      className="relative bg-ink-950/45"
       style={{ height: `${steps.length * 100}vh` }}
     >
       <div className="sticky top-0 flex h-screen items-center overflow-hidden px-6 md:px-10">
