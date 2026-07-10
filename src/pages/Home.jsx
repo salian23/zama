@@ -4,14 +4,12 @@ import TeaScene from '../components/three/TeaScene'
 import LeafBackground from '../components/LeafBackground'
 import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
-import ProductCard from '../components/ui/ProductCard'
 import Parallax from '../components/ui/Parallax'
 import FocusReveal from '../components/ui/FocusReveal'
 import WordReveal from '../components/ui/WordReveal'
 import RitualSequence from '../components/RitualSequence'
 import { useIntroDone } from '../context/IntroContext'
 import { getTimeOfDay } from '../lib/timeOfDay'
-import { PRODUCTS } from '../data/products'
 
 // Choreographed hero entrance — items rise and un-blur in sequence once the
 // preloader curtain lifts, for a deliberate, premium reveal.
@@ -82,7 +80,6 @@ const UGC = [
 
 export default function Home() {
   const heroRef = useRef(null)
-  const featured = PRODUCTS.slice(0, 4)
   const introDone = useIntroDone()
   const greeting = getTimeOfDay().greeting
 
@@ -159,25 +156,6 @@ export default function Home() {
             </span>
             <div className="h-10 w-px bg-gradient-to-b from-cream/50 to-transparent" />
           </motion.div>
-        </div>
-      </section>
-
-      <section className="relative bg-ink-950/55 px-6 md:px-10 py-28">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeading
-            eyebrow="This Season's Harvest"
-            title="Featured Teas"
-          />
-          <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {featured.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
-          <div className="mt-16 flex justify-center">
-            <Button to="/shop" variant="ghost">
-              View Full Menu
-            </Button>
-          </div>
         </div>
       </section>
 
