@@ -18,7 +18,13 @@ export default function Shop() {
 
   return (
     <main className="relative">
-      <LeafBackground image="/images/shop-leaf-bg.webp" ease={0.06} scale={1.18} />
+      <LeafBackground
+        image="/images/shop-leaf-bg.webp"
+        staticImage
+        scale={1.04}
+        edges="/images/shop-leaf-edges.png"
+        edgeColor="#3fe6b3"
+      />
       <LayeredHero
         image="/images/shop-hero.webp"
         cutout="/images/shop-hero-cup.webp"

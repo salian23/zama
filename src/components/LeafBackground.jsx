@@ -11,11 +11,15 @@ export default function LeafBackground({
   ease = 0.05,
   brightness = 0.62,
   overlay = 0.48,
+  edges = null,
+  edgeColor = '#3fe6b3',
+  staticImage = false,
 }) {
   const imgRef = useRef(null)
   const glowRef = useRef(null)
 
   useEffect(() => {
+    if (staticImage) return
     const img = imgRef.current
     const glow = glowRef.current
     if (!img) return
@@ -60,7 +64,7 @@ export default function LeafBackground({
       window.removeEventListener('pointermove', onMove)
       cancelAnimationFrame(raf)
     }
-  }, [scale, ease])
+  }, [scale, ease, staticImage])
 
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
@@ -79,6 +83,29 @@ export default function LeafBackground({
       <div ref={glowRef} className="absolute inset-0 mix-blend-screen" />
       <div className="absolute inset-0" style={{ background: `rgba(7,8,10,${overlay})` }} />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,rgba(7,8,10,0.78)_100%)]" />
+
+      {/* "Living light" traced along the leaf edges: a constant soft rim glow
+          plus a bright band that flows along the contours. */}
+      {edges && (
+        <>
+          <div
+            className="leaf-edge-glow"
+            style={{
+              WebkitMaskImage: `url(${edges})`,
+              maskImage: `url(${edges})`,
+              background: edgeColor,
+            }}
+          />
+          <div
+            className="leaf-edge-flow"
+            style={{
+              WebkitMaskImage: `url(${edges})`,
+              maskImage: `url(${edges})`,
+              backgroundImage: `linear-gradient(115deg, transparent 30%, ${edgeColor} 47%, #ffffff 50%, ${edgeColor} 53%, transparent 70%)`,
+            }}
+          />
+        </>
+      )}
     </div>
   )
 }

@@ -316,6 +316,44 @@ body {
   font-weight: 600;
 }
 
+/* "Living light" on the leaf edges — masked to an edge map, a constant soft
+   rim glow (gently pulsing) plus a bright band that flows along the contours. */
+.leaf-edge-glow,
+.leaf-edge-flow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.leaf-edge-glow {
+  opacity: 0.3;
+  filter: blur(1.2px);
+  animation: edgePulse 5s ease-in-out infinite;
+}
+.leaf-edge-flow {
+  background-size: 280% 280%;
+  opacity: 0.95;
+  animation: edgeFlow 7.5s linear infinite;
+}
+@keyframes edgePulse {
+  0%, 100% { opacity: 0.18; }
+  50% { opacity: 0.4; }
+}
+@keyframes edgeFlow {
+  0% { background-position: 130% 130%; }
+  100% { background-position: -30% -30%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .leaf-edge-flow { animation: none; }
+  .leaf-edge-glow { animation: none; opacity: 0.3; }
+}
+
 /* Hover-to-zoom loupe: specular highlight, focus vignette and a one-shot
    sheen sweep that rakes light across the leaf when the zoom engages. */
 .magnify-gloss {
