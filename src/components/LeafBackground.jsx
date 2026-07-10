@@ -89,6 +89,17 @@ export default function LeafBackground({
           plus a bright band that flows along the contours. */}
       {edges && (
         <>
+          {/* wide bloom that bleeds the glow out into the surroundings */}
+          <div className="leaf-edge-bloom">
+            <div
+              className="leaf-edge-bloom-mask"
+              style={{
+                WebkitMaskImage: `url(${edges})`,
+                maskImage: `url(${edges})`,
+                background: edgeGradient || edgeColor,
+              }}
+            />
+          </div>
           <div
             className="leaf-edge-glow"
             style={{

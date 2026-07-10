@@ -332,9 +332,30 @@ body {
   mask-repeat: no-repeat;
 }
 .leaf-edge-glow {
-  opacity: 0.3;
-  filter: blur(1.2px);
+  opacity: 0.6;
+  filter: blur(1px);
   animation: edgePulse 5s ease-in-out infinite;
+}
+/* Wide bloom: the masked glow (inner) is blurred by the wrapper so the light
+   bleeds outward into the dark surroundings. */
+.leaf-edge-bloom {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: blur(9px);
+  opacity: 0.6;
+  animation: edgePulse 5s ease-in-out infinite;
+}
+.leaf-edge-bloom-mask {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 .leaf-edge-flow {
   background-size: 300% 300%;
@@ -357,7 +378,8 @@ body {
    edge glow so nothing appears to "move around" on mobile. */
 @media (pointer: coarse), (max-width: 768px) {
   .leaf-edge-flow { display: none; }
-  .leaf-edge-glow { animation: none; opacity: 0.32; }
+  .leaf-edge-glow { animation: none; opacity: 0.62; }
+  .leaf-edge-bloom { animation: none; opacity: 0.6; }
 }
 
 /* Hover-to-zoom loupe: specular highlight, focus vignette and a one-shot
