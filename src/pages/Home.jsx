@@ -82,65 +82,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="relative bg-tea-950/40 border-y border-cream/10 px-6 md:px-10 py-28 overflow-hidden">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 md:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="eyebrow text-gold-300 mb-4 block">
-              A Philosophy, Not a Product
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl text-cream leading-tight">
-              Tea is the pause your day forgot it needed.
-            </h2>
-            <p className="mt-6 text-cream/60 leading-relaxed max-w-lg">
-              We work directly with fourth-generation growers across four
-              mountain regions, paying well above market rate for leaves
-              picked at their peak. What arrives in your cup is unhurried,
-              traceable, and honest.
-            </p>
-            <div className="mt-8">
-              <Button to="/about" variant="ghost">
-                Read Our Story
-              </Button>
-            </div>
-          </motion.div>
-
-          <Parallax speed={40}>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="relative aspect-square rounded-3xl overflow-hidden border border-gold-400/20"
-            >
-              <video
-                className="absolute inset-0 h-full w-full object-cover"
-                src="/videos/tea-steam.mp4"
-                poster="/images/tea-steam-poster.jpg"
-                autoPlay
-                muted
-                loop
-                playsInline
-                aria-hidden="true"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/10 to-transparent" />
-              <div className="absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_70%_75%,rgba(212,162,74,0.35),transparent_55%)]" />
-            </motion.div>
-          </Parallax>
-        </div>
-      </section>
-
-      <RitualSequence
-        eyebrow="The Ritual"
-        title="From Mountain to Mug"
-        steps={STEPS}
-      />
-
-      {/* Full-bleed cinematic pour banner — after the ritual journey */}
+      {/* Full-bleed cinematic pour banner */}
       <section className="relative h-[70vh] min-h-[440px] w-full overflow-hidden">
         <Parallax speed={70} className="absolute inset-x-0 -inset-y-[14%]">
           <video
@@ -165,9 +107,7 @@ export default function Home() {
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             className="mx-auto max-w-7xl w-full px-6 md:px-10"
           >
-            <span className="eyebrow text-gold-300 mb-5 block">
-              The Pour
-            </span>
+            <span className="eyebrow text-gold-300 mb-5 block">The Pour</span>
             <h2 className="font-display text-4xl sm:text-5xl md:text-7xl text-cream leading-[1.02] max-w-2xl">
               Every cup begins
               <br /> with a slow pour.
@@ -182,6 +122,40 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <section className="relative bg-tea-950/40 border-y border-cream/10 px-6 md:px-10 py-28 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.8 }}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <span className="eyebrow text-gold-300 mb-4 block">
+            A Philosophy, Not a Product
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl text-cream leading-tight">
+            Tea is the pause your day forgot it needed.
+          </h2>
+          <p className="mt-6 text-cream/60 leading-relaxed mx-auto max-w-xl">
+            We work directly with fourth-generation growers across four
+            mountain regions, paying well above market rate for leaves
+            picked at their peak. What arrives in your cup is unhurried,
+            traceable, and honest.
+          </p>
+          <div className="mt-8">
+            <Button to="/about" variant="ghost">
+              Read Our Story
+            </Button>
+          </div>
+        </motion.div>
+      </section>
+
+      <RitualSequence
+        eyebrow="The Ritual"
+        title="From Mountain to Mug"
+        steps={STEPS}
+      />
 
       <section className="relative bg-ink-900/55 px-6 md:px-10 py-28">
         <div className="mx-auto max-w-7xl">
