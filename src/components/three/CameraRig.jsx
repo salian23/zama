@@ -23,7 +23,10 @@ export default function CameraRig({ children, scrollProgress, lookAt = [0, 1.1, 
       // Scroll-driven reveal + a slow continuous turntable so the scene
       // reads as living 3D even when the visitor isn't scrolling.
       const t = state.clock.getElapsedTime()
-      groupRef.current.rotation.y = progress * Math.PI * 0.9 + t * 0.12
+      // Gently rock the cup instead of spinning it a full turn, so its good
+      // side stays to camera and the second handle never swings into view.
+      groupRef.current.rotation.y =
+        progress * Math.PI * 0.32 + Math.sin(t * 0.22) * 0.16
       groupRef.current.position.y = -progress * 0.6
       groupRef.current.scale.setScalar(1 - progress * 0.12)
     }

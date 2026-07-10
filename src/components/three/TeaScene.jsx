@@ -1,6 +1,7 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { ContactShadows, Environment, Lightformer } from '@react-three/drei'
+import * as THREE from 'three'
 import {
   EffectComposer,
   Bloom,
@@ -57,6 +58,36 @@ function ResponsiveCamera() {
   return null
 }
 
+// A soft warm halo painted behind the cup so it sits on a lit "stage" rather
+// than floating in flat black — a canvas radial gradient on an additive plane.
+function GlowBackdrop({ position = [0, 0.4, -2], scale = 9 }) {
+  const texture = useMemo(() => {
+    const c = document.createElement('canvas')
+    c.width = c.height = 512
+    const ctx = c.getContext('2d')
+    const g = ctx.createRadialGradient(256, 256, 0, 256, 256, 256)
+    g.addColorStop(0, 'rgba(212,162,74,0.42)')
+    g.addColorStop(0.4, 'rgba(126,84,38,0.2)')
+    g.addColorStop(1, 'rgba(0,0,0,0)')
+    ctx.fillStyle = g
+    ctx.fillRect(0, 0, 512, 512)
+    return new THREE.CanvasTexture(c)
+  }, [])
+  return (
+    <mesh position={position} scale={[scale, scale, 1]}>
+      <planeGeometry args={[1, 1]} />
+      <meshBasicMaterial
+        map={texture}
+        transparent
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+        toneMapped={false}
+        fog={false}
+      />
+    </mesh>
+  )
+}
+
 export default function TeaScene({ sectionRef, className = '' }) {
   const scrollProgress = useRef(0)
   const [portrait, setPortrait] = useState(false)
@@ -96,6 +127,8 @@ export default function TeaScene({ sectionRef, className = '' }) {
         <color attach="background" args={['#07080a']} />
         <fogExp2 attach="fog" args={['#07080a', tod.fog]} />
 
+        <GlowBackdrop position={[0, portrait ? -1.5 : -0.5, -2]} scale={portrait ? 6.5 : 8} />
+
         <ambientLight intensity={tod.ambient.intensity} color={tod.ambient.color} />
         <directionalLight
           position={[3.2, 5, 2.4]}
@@ -107,6 +140,8 @@ export default function TeaScene({ sectionRef, className = '' }) {
         <pointLight position={[-3.5, 2.2, -2]} intensity={tod.rim.intensity} color={tod.rim.color} />
         <pointLight position={[0, 0.6, 3]} intensity={tod.warm.intensity} color={tod.warm.color} />
         <pointLight position={[0, 2.6, 1.5]} intensity={0.5} color="#f4ecda" />
+        {/* Low warm pool that lifts the saucer off the black backdrop. */}
+        <pointLight position={[0, -0.9, 1.6]} intensity={0.55} color="#e0a860" distance={7} />
 
         <Suspense fallback={<Loader />}>
           <Environment resolution={256}>
@@ -147,10 +182,10 @@ export default function TeaScene({ sectionRef, className = '' }) {
           </CameraRig>
           <DustMotes count={portrait ? 80 : 140} radius={6} />
           <ContactShadows
-            position={[0, portrait ? -1.7 : -0.35, 0]}
-            opacity={0.55}
-            scale={7}
-            blur={2.4}
+            position={[0, portrait ? -1.72 : -0.37, 0]}
+            opacity={0.75}
+            scale={8}
+            blur={2.8}
             far={3}
           />
 
