@@ -14,7 +14,7 @@ export default function ProductCard({ product }) {
   // Cursor-following 3D tilt (desktop only). Pop-out cards tilt harder and
   // lift toward the viewer, so the image feels like it's coming off the screen.
   const pop = product.popOut
-  const tilt = pop ? 14 : 7
+  const tilt = pop ? 20 : 7
   const px = useMotionValue(0.5)
   const py = useMotionValue(0.5)
   const rotateX = useSpring(useTransform(py, [0, 1], [tilt, -tilt]), { stiffness: 150, damping: 18 })
@@ -55,10 +55,15 @@ export default function ProductCard({ product }) {
       }}
       whileHover={
         pop
-          ? { scale: 1.06, boxShadow: '0 45px 90px -25px rgba(0,0,0,0.8)', zIndex: 30 }
+          ? {
+              scale: 1.12,
+              y: -14,
+              boxShadow: '0 70px 120px -20px rgba(0,0,0,0.9), 0 0 60px -10px rgba(212,162,74,0.25)',
+              zIndex: 30,
+            }
           : undefined
       }
-      transition={{ type: 'spring', stiffness: 200, damping: 22 }}
+      transition={{ type: 'spring', stiffness: 220, damping: 20 }}
       className={`group relative flex flex-col overflow-hidden rounded-2xl border border-cream/10 bg-ink-800/60 backdrop-blur-sm ${
         pop ? 'hover:border-gold-400/50' : ''
       }`}
@@ -77,7 +82,7 @@ export default function ProductCard({ product }) {
             loading="lazy"
             onError={() => setImgOk(false)}
             className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out ${
-              pop ? 'group-hover:scale-[1.18]' : 'group-hover:scale-110'
+              pop ? 'group-hover:scale-[1.28]' : 'group-hover:scale-110'
             }`}
           />
         )}
