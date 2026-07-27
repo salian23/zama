@@ -112,9 +112,40 @@ export default function WelcomeRitual() {
           aria-modal="true"
           aria-label="Welcome to Beth Tea"
         >
-          {/* Deep, warm room */}
+          {/* Misty tea field at first light */}
           <div className="absolute inset-0 bg-ink-950" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_38%,rgba(212,162,74,0.16),transparent_62%)]" />
+          <svg
+            className="absolute inset-0 h-full w-full"
+            viewBox="0 0 1440 900"
+            preserveAspectRatio="xMidYMid slice"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="tf-sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#0a1712" />
+                <stop offset="45%" stopColor="#14261c" />
+                <stop offset="100%" stopColor="#243020" />
+              </linearGradient>
+              <radialGradient id="tf-sun" cx="50%" cy="40%" r="45%">
+                <stop offset="0%" stopColor="rgba(226,182,98,0.30)" />
+                <stop offset="100%" stopColor="rgba(226,182,98,0)" />
+              </radialGradient>
+              <linearGradient id="tf-fog" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="rgba(210,225,205,0.18)" />
+                <stop offset="100%" stopColor="rgba(210,225,205,0)" />
+              </linearGradient>
+            </defs>
+            <rect width="1440" height="900" fill="url(#tf-sky)" />
+            <rect width="1440" height="520" fill="url(#tf-sun)" />
+            {/* rows of tea bushes receding to the misty horizon (back → front) */}
+            <path d="M0,352 C 360,320 720,372 1080,338 S 1440,346 1440,352 L1440,900 L0,900 Z" fill="#3a5a40" opacity="0.55" />
+            <rect y="300" width="1440" height="120" fill="url(#tf-fog)" />
+            <path d="M0,442 C 380,408 760,470 1120,432 S 1440,440 1440,442 L1440,900 L0,900 Z" fill="#2c4a32" />
+            <path d="M0,552 C 340,512 780,586 1160,536 S 1440,548 1440,552 L1440,900 L0,900 Z" fill="#21402a" />
+            <path d="M0,672 C 420,624 820,708 1200,652 S 1440,668 1440,672 L1440,900 L0,900 Z" fill="#183422" />
+            <path d="M0,792 C 360,742 860,828 1240,768 S 1440,786 1440,792 L1440,900 L0,900 Z" fill="#0f2618" />
+          </svg>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(6,10,8,0.55),transparent_60%)]" />
           {/* Living tea field — sprouts grow here as the pointer moves */}
           {phase === 'seated' && (
             <div ref={fieldRef} className="pointer-events-none absolute inset-0 z-[1]" aria-hidden="true" />
