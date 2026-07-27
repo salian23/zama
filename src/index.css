@@ -478,8 +478,8 @@ body {
   will-change: transform, opacity;
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
   animation:
-    sproutGrow 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-    farmSway 5.5s ease-in-out 1.6s infinite;
+    sproutGrow 2.3s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    farmSway 6s ease-in-out 2.4s infinite;
 }
 .farm-sprout.farm-fade {
   animation: farmFade 1.3s ease forwards;
