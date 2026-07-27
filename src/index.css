@@ -451,3 +451,52 @@ body {
   25% { opacity: 1; }
   100% { transform: translateX(130%); opacity: 0; }
 }
+
+/* ---------------- Interactive Tea Farm ---------------- */
+.tea-farm {
+  background:
+    radial-gradient(120% 70% at 50% -8%, rgba(240, 216, 150, 0.16), transparent 60%),
+    linear-gradient(180deg, #0e1512 0%, #12211a 52%, #0a130e 100%);
+}
+/* soft misty soil band at the base */
+.tea-farm::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 34%;
+  background: linear-gradient(180deg, transparent, rgba(6, 12, 9, 0.85));
+  pointer-events: none;
+  z-index: 1;
+}
+.farm-field {
+  z-index: 2;
+  cursor: crosshair;
+}
+.farm-sprout {
+  position: absolute;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+  animation:
+    sproutGrow 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    farmSway 5.5s ease-in-out 1.6s infinite;
+}
+.farm-sprout.farm-fade {
+  animation: farmFade 1.3s ease forwards;
+}
+@keyframes sproutGrow {
+  0% { transform: scale(0.12); opacity: 0; }
+  22% { opacity: 1; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes farmSway {
+  0%, 100% { rotate: -1.6deg; }
+  50% { rotate: 1.6deg; }
+}
+@keyframes farmFade {
+  to { opacity: 0; transform: scale(0.96) translateY(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .farm-sprout { animation: none; }
+}

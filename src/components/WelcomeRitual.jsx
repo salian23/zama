@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useIntroDone } from '../context/IntroContext'
 import { getTimeOfDay } from '../lib/timeOfDay'
+import { attachTeaGrowth } from '../lib/teaGrowth'
 import { PRODUCTS } from '../data/products'
 
 // The signature arrival. The instant the boot curtain dissolves, the visitor
@@ -28,6 +29,8 @@ export default function WelcomeRitual() {
   const navigate = useNavigate()
   const [phase, setPhase] = useState('idle') // idle | seated | chosen | done
   const [chosen, setChosen] = useState(null)
+  const overlayRef = useRef(null)
+  const fieldRef = useRef(null)
 
   const { phase: tod } = getTimeOfDay()
   const salutation = SALUTATION[tod] || 'Welcome'
@@ -59,6 +62,17 @@ export default function WelcomeRitual() {
     }
   }, [open])
 
+  // While the visitor is being "seated", the whole arrival screen becomes a
+  // living tea field: moving across it sprouts and grows tea leaves.
+  useEffect(() => {
+    if (phase !== 'seated') return undefined
+    return attachTeaGrowth(overlayRef.current, fieldRef.current, {
+      spawnDist: 44,
+      maxPlants: 60,
+      lifespan: 7000,
+    })
+  }, [phase])
+
   const finish = useCallback(
     (to) => {
       try {
@@ -84,6 +98,7 @@ export default function WelcomeRitual() {
       {open && (
         <motion.div
           key="welcome"
+          ref={overlayRef}
           className="fixed inset-0 z-[120] flex items-center justify-center overflow-hidden px-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -100,6 +115,10 @@ export default function WelcomeRitual() {
           {/* Deep, warm room */}
           <div className="absolute inset-0 bg-ink-950" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_38%,rgba(212,162,74,0.16),transparent_62%)]" />
+          {/* Living tea field — sprouts grow here as the pointer moves */}
+          {phase === 'seated' && (
+            <div ref={fieldRef} className="pointer-events-none absolute inset-0 z-[1]" aria-hidden="true" />
+          )}
           <div className="ritual-vignette" />
 
           <AnimatePresence mode="wait">
